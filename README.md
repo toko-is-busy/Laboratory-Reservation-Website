@@ -5,25 +5,6 @@ A Node.js + Vue web application for managing laboratory reservations. Built with
 
 ⚠️ Note: The database hosted on MongoDB Atlas is currently not running. Pages that rely on database interactions (e.g., login, registration, reservations) will not function properly until the database connection is restored.
 
-📁 Project Structure
---------------------
-
-Laboratory-Reservation-Website/
-├── CSS/                # Stylesheets
-├── JS/                 # Client-side scripts
-├── node/               # Server and backend logic
-│   ├── server.js       # Express server
-│   └── models/         # MongoDB schemas (if any)
-├── public/             # Static HTML pages
-│   ├── index.html
-│   ├── login.html
-│   ├── register.html
-│   ├── reserve.html
-│   └── ...
-├── .env                # Environment variables (Mongo URI, etc.)
-├── .gitignore
-├── package.json
-
 🚀 How to Run the Project
 --------------------------
 
