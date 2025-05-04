@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lab Reservation System</title>
+  <link rel="stylesheet" type="text/css" href="CSS/nav.css">
+  <link rel="stylesheet" type="text/css" href="CSS/index.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins&display=swap">
+  <script src="https://unpkg.com/vue@2"></script>
+</head>
+<body>
+  <div id="app">
+    <nav class="navBar">
+      <div class="webName">
+        <span><a class="title" href="index.html">Laboratory Reservation</a></span>
+        <span><a class="title" v-if="!loggedInUser" href="login.html">Login</a></span>
+        <span><a class="title" v-if="checkUser()" href="reserve.html" >Reserve</a></span>
+        <span><a class="title" v-if="loggedInUser" href="availability.html">View Availability</a></span>
+      </div>
+      <div class="searchbar" v-if="loggedInUser">
+        <input type="text" placeholder="Search" v-model="searchQuery" class="bar">
+        <div v-bind:class="myClass">
+          <div class="hatdog">
+            <ul v-if="isDate == false" v-for="x, index in holdProfile" class="dropdownSearch">
+              <li class="drop"><a class="drop" :href="holdURL[index]">{{x}}</a></li>
+            </ul>
+            <ul v-if="isDate == true" v-for="y, index in holdDate" class="dropdownSearch">
+              <li class="drop"><a class="drop" :href="holdURL[index]">{{y}}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="dropdownProfile" v-if="checkUser()">
+        <div class="profileUser">
+          <button class="profile-button" @click="toggleDropdown">{{loggedInUser}}</button>
+          <ul v-if="isOpen" class="dropdown">
+            <li><a href="availability.html">Lab Availability</a></li>
+            <li><a href="reserve.html">Reserve</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li @click="logOut">Logout</li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <header>
+    <h1>Welcome to the Computer Laboratory Reservation System!</h1>
+    <p class="description">Our platform provides a convenient and efficient way for users to reserve computer labs for various purposes. Whether you're a student looking to work on projects, a researcher needing access to specialized software, or a faculty member planning a class session, our system is designed to meet your needs. With our user-friendly interface, you can easily search for available labs based on your preferred date, time, and specific requirements. The system provides comprehensive information about each lab, including equipment availability, seating capacity, and additional amenities. This ensures that you can find the perfect lab that suits your needs. Once you've identified the ideal lab, our reservation process is seamless and straightforward. Simply select your desired date and time slot and confirm your booking. Our system will instantly reserve the lab for you, ensuring a hassle-free experience.</p>
+    <p class="description">Please make sure to show up 10 minutes within your reservation or the admin has the rights to cancel your seat reservation right away.</p>
+    <div class="button-container"  v-if="checkUser()">
+      <button v-if="loggedInUser" class="make-reservation" onclick="window.location.href='reserve.html'">Make a Seat Reservation </button>
+    </div>
+  </header>
+  
+
+  <h1>Meet the Developers</h1>
+  
+
+  <div class="developers">
+    <div class="developer">
+      <img src="Pictures/yasmin.png" alt="Yasmin Datario">
+      <h3>Yasmin Datario</h3>
+      <p>Front-end Developer</p>
+    </div>
+    <div class="developer">
+      <img src="Pictures/anton.jpg" alt="Anton Mendoza">
+      <h3>Anton Mendoza</h3>
+      <p>Back-end Developer</p>
+    </div>
+    <div class="developer">
+      <img src="Pictures/vinnie.jpg" alt="Vinnie Inocencio">
+      <h3>Vinnie Inocencio</h3>
+      <p>UI/UX Designer</p>
+    </div>
+  </div>
+
+  <script type="module" src="JS/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!-- RESERVATION -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reserve | Lab Reservation System</title>
+  <link rel="stylesheet" type="text/css" href="CSS/nav.css">
+  <link rel="stylesheet" href="CSS/reserve.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins&display=swap">
+  <script src="https://unpkg.com/vue@2"></script>
+  <style>
+    .reservation-details {
+      position: absolute;
+      display: none;
+      background-color: #fff;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    td.reserved:hover .reservation-details {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <nav class = "navBar">
+      <div class="webName">
+        <span><a class="title" href="index.html">Laboratory Reservation</a></span>
+        <span><a class="title" href="reserve.html">Reserve</a></span>
+        <span><a class="title" href="availability.html">View Availability</a></span>
+      </div>
+      <div class="searchbar">
+        <input type="text" placeholder="Search" v-model="searchQuery" class="bar">
+        <div v-bind:class ="myClass">
+          <div class ="hatdog">
+            <ul v-if="isDate == false" v-for="x, index in holdProfile" class="dropdownSearch">
+              <li class="drop"><a class="drop" :href= "holdURL[index]">{{x}}</a></li>
+            </ul>
+            <ul v-if="isDate == true" v-for="y, index in holdDate" class="dropdownSearch">
+              <li class="drop"><a class="drop" :href= "holdURL[index]">{{y}}</a></li>
+            </ul>
+          </div> 
+        </div> 
+      </div>
+      <div class="dropdownProfile">
+        <div class="profileUser">
+          <button class="profile-button" @click="toggleDropdown">{{loggedInUser}}</button>
+        <ul v-if="isOpen" class="dropdown">
+          <li><a href="availability.html">Lab Availability</a></li>
+          <li><a href="reserve.html">Reserve</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li @click="logOut">Logout</li>
+        </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class ="content">
+      <h1>Reserve Lab Slot</h1>
+    <label for="lab">Lab:</label>
+    <select id="lab" v-model="selectedLab" required>
+      <option value="">Select Lab</option>
+      <option v-for="lab in labs" :value="lab">{{ lab }}</option>
+    </select>
+
+    <label for="date">Date:</label>
+    <input id="date" type="date" v-model="selectedDate" required>
+
+    <label v-if="loggedInUser === 'admin'" for="user">User:</label>
+    <select v-if="loggedInUser === 'admin'" id="user" v-model="selectedUser" required>
+      <option value="">Select User</option>
+      <option v-for="user in profiles" :value="user.username">{{ user.username }}</option>
+    </select>
+
+    <label for="anonymous">Reserve as anonymous:</label>
+    <input id="anonymous" type="checkbox" v-model="anonymousReservation">
+
+    <div class="grid-container">
+      <div class="grid-item" v-for="seat in seats" :key="seat" @click="updateSelectedSeat(seat)" :class="{ selected: seat === selectedGridItem }"> <h1>{{ seat}}</h1> </div>
+    </div>
+
+    <div class="reservation-table">
+      <table>
+        <thead>
+          <tr>
+            <th> timeslot </th>
+            <th v-for="timeSlot in timeSlots" :key="timeSlot">{{ timeSlot }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="seat in seats" :key="seat" v-if="seat === selectedGridItem">
+            <td>{{ seat }}</td>
+            <td v-for="timeSlot in timeSlots" :key="timeSlot" :class="{ reserved: isReserved(seat, timeSlot), selected: isSelected(seat, timeSlot) }">
+              <label>
+                <input type="checkbox"
+                       :disabled="isReserved(seat, timeSlot)"
+                       :checked="isSelected(seat, timeSlot)"
+                       @change="selectSeat(seat, timeSlot)">
+              </label>
+              <div class="reservation-details" v-if="isReserved(seat, timeSlot)">
+                <div v-if="dbReservation[selectedLab][selectedDate][seat][timeSlot].anonymity == false || loggedInUser === 'admin' || !loggedInUser === 'admin'">Reserved by: {{ dbReservation[selectedLab][selectedDate][seat][timeSlot].owner }}</div>
+                <div v-if="dbReservation[selectedLab][selectedDate][seat][timeSlot].anonymity == true || !loggedInUser === 'admin'">Reserved by: Anonymous</div>
+                <div>Seat Number: {{ seat }}</div>
+                <div>Lab Number: {{ selectedLab }}</div>
+                <div>Time Slot: {{ timeSlot }}</div>
+                <div>Request Time: {{ dbReservation[selectedLab][selectedDate][seat][timeSlot].requestTime }}</div>
+                <button v-if="canCancelReservation(seat, timeSlot)" @click="cancelReservation(seat, timeSlot)">Cancel</button>
+                <button v-if="(isReserved(seat, timeSlot) && dbReservation[selectedLab][selectedDate][seat][timeSlot].anonymity == false) || loggedInUser === 'admin'" @click="viewProfile(seat, timeSlot)">View Profile</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+
+    <div class="button-container">
+      <button class="resButton" @click="confirmReservation">Confirm Reservation</button>
+      <button class="resButton" @click="resetReservations">Cancel Entire Seat Reservation</button>
+      <br>
+      <button v-if = "loggedInUser === 'admin'" class="resButton" @click="redirectToProfile">Edit and Delete Reservations</button>      
+    </div>
+  </div>
+  </div>
+  <script type="module" src="JS/reserve.js"></script>
+</body>
+</html> 

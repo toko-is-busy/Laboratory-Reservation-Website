@@ -1,0 +1,136 @@
+body {
+  background-color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+}
+
+.navBar{
+	top: 0px;
+	z-index: 3;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid #007BFF;
+	display: flex;
+	align-items: center;
+	height: 60px;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #F8F7F5;
+}
+
+.webName {
+  flex: 1;
+  display: flex;
+  color: #333;
+  text-align: left;
+  padding: 14px 16px;
+  text-decoration: none;
+  background: none;
+}
+
+.title{
+  text-decoration: none;
+  color: #333;
+  margin-right: 12px;
+}
+
+.title:hover{
+  text-decoration: none;
+  color: #333;
+  margin-right: 12px;
+  text-decoration: underline;
+}
+
+.searchbar {
+  flex: 2;
+  margin-top: 3px;
+  margin-right: 5px;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+}
+
+.dropdownProfile {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.navbar-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.profileUser {
+  position: absolute;
+  flex: 1;
+  display: flex;
+  color: #333;
+  text-align: right;
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+
+.profile-button {
+  margin-right: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #f2f2f2;
+  list-style-type: none;
+  padding: 5px 0;
+  margin: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown li {
+  padding: 10px;
+}
+
+.dropdown li a {
+  text-decoration: none;
+  color: #333;
+}
+
+.dropdown li a:hover {
+  color: #000;
+}
+
+.hatdog{
+  margin-top: 20px;
+  position: absolute;
+}
+.dropdownSearch {
+  margin: 0;
+  top: 100%;
+  width: 100%;
+  background-color: #f2f2f2;
+  list-style-type: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+}
+
+.drop{
+  display: flex;
+  padding: 5px;
+  text-decoration: none;
+}
+
+.bar {
+  position: absolute; /* Change position to relative */
+  display:flex;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #333;
+  margin-right: 8px;
+  width: 45%;
+}

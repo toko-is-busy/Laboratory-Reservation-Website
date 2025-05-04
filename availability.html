@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Availability | Lab Reservation System</title>
+  <link rel="stylesheet" type="text/css" href="CSS/nav.css">
+  <link rel="stylesheet" href="CSS/availability.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins&display=swap">
+  <script src="https://unpkg.com/vue@2"></script>
+</head>
+<body>
+  <div class="app">
+    <nav class = "navBar">
+      <div class="webName">
+        <span><a class="title" href="index.html">Laboratory Reservation</a></span>
+        <span><a class="title" href="reserve.html">Reserve</a></span>
+        <span><a class="title" href="availability.html">View Availability</a></span>
+      </div>
+      <div class="searchbar">
+        <input type="text" placeholder="Search" v-model="searchQuery" class="bar">
+        <div v-bind:class ="myClass">
+          <div class ="hatdog">
+            <ul v-if="isDate == false" v-for="x, index in holdProfile" class="dropdownSearch">
+              <li class="drop"><a class="drop" :href= "holdURL[index]">{{x}}</a></li>
+            </ul>
+            <ul v-if="isDate == true" v-for="y, index in holdDate" class="dropdownSearch">
+              <li class="drop"><a class="drop" :href= "holdURL[index]">{{y}}</a></li>
+            </ul>
+          </div> 
+        </div> 
+      </div>
+      <div class="dropdownProfile">
+        <div class="profileUser">
+          <button class="profile-button" @click="toggleDropdown">{{loggedInUser}}</button>
+        <ul v-if="isOpen" class="dropdown">
+          <li><a href="availability.html">Lab Availability</a></li>
+          <li><a href="reserve.html">Reserve</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li @click="logOut">Logout</li>
+        </ul>
+        </div>
+        
+      </div>
+    
+    </nav>
+
+    <h1>Lab Slot Availability</h1>
+    <div class="resLabContainer">
+      <button class="resLab" v-for="day in dates" :key="day" @click="selectedDate = day">{{ day }}</button>
+    </div>
+
+    <div class="labs-container">
+      <div class="lab-box">
+        <h2>{{ labs[0] }}</h2>
+        <p>Available seats: {{ availableSeats(labs[0]) }}</p>
+        <p>Available slots: {{ availableTimeSlots(labs[0], availableSeats(labs[0]))*availableSeats(labs[0]) - reservedSlotsForProfile("Lab 1", selectedDate)}}</p>
+        <button class="resLab" @click="reserveLab(labs[0])">Make a Reservation for {{ labs[0] }}</button>
+      </div>
+      <div class="lab-box">
+        <h2>{{ labs[1] }}</h2>
+        <p>Available seats: {{ availableSeats(labs[1]) }}</p>
+        <p>Available slots: {{ availableTimeSlots(labs[1], availableSeats(labs[1]))*availableSeats(labs[1]) - reservedSlotsForProfile("Lab 2", selectedDate)}}</p>
+        <button class="resLab" @click="reserveLab(labs[1])">Make a Reservation for {{ labs[1] }}</button>
+      </div>
+      <div class="lab-box">
+        <h2>{{ labs[2] }}</h2>
+        <p>Available seats: {{ availableSeats(labs[2]) }}</p>
+        <p>Available slots: {{ availableTimeSlots(labs[2], availableSeats(labs[2]))*availableSeats(labs[2]) - reservedSlotsForProfile("Lab 3", selectedDate)}}</p>
+        <button class="resLab" @click="reserveLab(labs[2])">Make a Reservation for {{ labs[2] }}</button>
+      </div>
+    </div>    
+  </div>
+  <script type="module" src="JS/availability.js"></script>
+</body>
+</html>

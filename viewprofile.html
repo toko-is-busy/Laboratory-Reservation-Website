@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Profile | Lab Reservation System</title>
+  <link rel="stylesheet" href="CSS/profile.css">
+  <link rel="stylesheet" href="CSS/nav.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins&display=swap">
+  <script src="https://unpkg.com/vue@2"></script>
+</head>
+<body>
+  <div id="app">
+    <nav class="navBar">
+      <div class="webName">
+        <span><a class="title" href="index.html">Laboratory Reservation</a></span>
+        <span><a class="title" href="reserve.html">Reserve</a></span>
+        <span><a class="title" href="availability.html">View Availability</a></span>
+      </div>
+      <div class="searchbar">
+        <input type="text" placeholder="Search" v-model="searchQuery" class="bar">
+        <div v-bind:class="myClass">
+          <div class="hatdog">
+            <ul v-if="isDate == false" v-for="x, index in holdProfile" class="dropdownSearch">
+              <li class="drop"><a class="drop" :href= "holdURL[index]">{{x}}</a></li>
+            </ul>
+            <ul v-if="isDate == true" v-for="y, index in holdDate" class="dropdownSearch">
+              <li class="drop"><a class="drop" :href= "holdURL[index]">{{y}}</a></li>
+            </ul>
+          </div> 
+        </div> 
+      </div>
+      <div class="dropdownProfile">
+        <div class="profileUser">
+          <button class="profile-button" @click="toggleDropdown">{{loggedInUser}}</button>
+          <ul v-if="isOpen" class="dropdown">
+            <li><a href="availability.html">Lab Availability</a></li>
+            <li><a href="reserve.html">Reserve</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li @click="logOut">Logout</li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="profile">
+      <div class="profile-picture">
+        <img v-if="user" :src="user.picture || 'images/placeholder.jpg'" :alt="user.username" id="profile-image">
+        <input type="file" id="picture-input" style="display: none;" @change="handlePictureChange">       
+      </div>
+      <div class="profile-description">
+        <h1 class="profile-name">{{ user ? user.username : 'Loading...' }}</h1>
+        <p class="profile-info" id="profile-info">{{ user ? user.description : 'Loading...' }}</p>
+        <button v-if="loggedInUser === 'admin'" class="delete-account-button" @click="promptDeleteAccount">Delete Account</button>
+      </div>
+      <div class="social-media-links">
+        <a v-if="user && user.socialMedia && user.socialMedia.facebook" :href="user.socialMedia.facebook" target="_blank">Facebook</a>
+        <a v-if="user && user.socialMedia && user.socialMedia.twitter" :href="user.socialMedia.twitter" target="_blank">Twitter</a>
+        <a v-if="user && user.socialMedia && user.socialMedia.instagram" :href="user.socialMedia.instagram" target="_blank">Instagram</a>
+      </div>
+    </div>
+    <div class="reservations" v-if="user">
+      <table>
+        <caption>Current Reservations</caption>
+        <thead>
+          <tr>
+            <th>Lab</th>
+            <th>Date</th>
+            <th>Seat</th>
+            <th>Time</th>
+            <th v-if="loggedInUser === 'admin'">Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="reservation in reservations" v-if="user.username === reservation.username">
+            <td>{{ reservation.lab }}</td>
+            <td>{{ reservation.date }}</td>
+            <td>{{ reservation.seat }}</td>
+            <td v-html="formatReservationTime(reservation.timeSlot)"></td>
+            <td v-if="loggedInUser === 'admin'">
+              <button class="edit-this-reservation-button" @click="editReservation(reservation)">Edit</button>
+              <button class="edit-this-delete-button" @click="deleteReservation(reservation)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script type="module" src="JS/view.js"></script>
+</body>
+</html>

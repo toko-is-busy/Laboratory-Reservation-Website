@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login | Lab Reservation System</title>
+  <script src="https://unpkg.com/vue@2"></script>
+  <link rel="stylesheet" href="CSS/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins&display=swap">
+</head>
+<body>
+  <div id="app">
+    <h2>Welcome to the Computer Laboratory Reservation System!</h2>
+    <div class ="container">
+
+      <form @submit.prevent="submitForm">
+        <h1>Login</h1>
+  
+        <label class="em" for="username">Username:</label>
+        <input id="username" v-model="username" required>
+  
+        <label class="pass" for="password">Password:</label>
+        <input id="password" v-model="password" type="password" required>
+  
+        <button type="submit" class="log">Login</button>
+      </form>
+      <p v-if="loginError" class="error">{{ loginError }}</p>
+    </div>
+    <button class="sign" onclick="window.location.href='register.html'">
+      Register
+    </button>
+  </div>
+
+  <script type="module" src="JS/log.js"></script>
+</body>
+</html>

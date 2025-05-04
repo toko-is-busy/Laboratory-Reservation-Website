@@ -1,0 +1,82 @@
+.labs-container {
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: flex-start; /* Align items at the top */
+    flex-wrap: wrap; /* Allow the buttons to wrap to the next line if needed */
+    margin-top: 20px;
+  }
+  
+  h1 {
+    color: #0061c9;
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-align: center; /* Add this line to center the text */
+  }
+
+  .resLabContainer {
+    display: flex;
+    justify-content: center; 
+    align-items: flex-start; 
+    margin-top: 10px;
+  }
+
+  .resLab {
+    padding: 10px 20px;
+    background-color: #bed7f5;
+    color: #000000;
+    border:#0073ff solid 1px;
+    border-radius: 4px;
+    margin: 5px;
+  }
+
+  .resLab:focus{
+    padding: 10px 20px;
+    background-color: #86c980;
+    color: #000000;
+    border:#0073ff solid 1px;
+    border-radius: 4px;
+    margin: 5px;
+  }
+  
+  .resLab:hover {
+    background-color: #0056b3;
+  }
+  
+  .resLab.selected {
+    background-color: #004080;
+  }
+  
+
+  .lab-box {
+    flex-basis: 30%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #007BFF;
+    background-color: #F8F7F5;
+    margin-right: 30px;
+  }
+  
+  .lab-box h2 {
+    font-size: 20px;
+    color: #0061c9;
+    margin-bottom: 5px;
+  }
+  
+  .lab-box p {
+    font-size: 16px;
+    margin-top: 5px;
+  }
+  
+  .lab-box button {
+    padding: 8px 16px;
+    background-color: #007BFF;
+    color: #FFF;
+    border: none;
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+
+  .lab-box button:hover {
+    background-color: #0056b3;
+  }
+  

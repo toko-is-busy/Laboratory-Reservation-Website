@@ -1,0 +1,80 @@
+body {
+    background-color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  header {
+    background-color: #F8F7F5;
+    text-align: center;
+    padding: 40px;
+    border-radius: 10px;
+    border: 1px solid #007BFF;
+    margin-top: 20px;
+  }
+
+  .description {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 40px;
+  }
+  
+  header h1 {
+    font-size: 26px;
+    font-weight: normal;
+    color: #0061c9;
+    margin-top: 0;
+  }
+  
+  header p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  button.make-reservation {
+    background-color: #34a1db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  h1 {
+    color: #0061c9;
+    font-size: 25px;
+    text-align: center;
+  }
+  
+  .developers {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .developers .developer {
+    margin: 0 20px;
+    text-align: center;
+  }
+  
+  .developers .developer img {
+    width: 250px;
+    height: 250px;
+    border: 3px solid #90c6ff;
+    padding: 5px;
+    border-radius: 50%;
+  }
+  
+  .developers .developer h3 {
+    font-size: 18px;
+    color: #0061c9;
+    margin-top: 10px;
+  }
+  
+  .developers .developer p {
+    font-size: 14px;
+    margin-top: 5px;
+    color: #333;
+  }
+  
